@@ -308,7 +308,8 @@
 	<script>
 		var downloadBaseUrl = "https://cuit.site.asyncraft.club/source/";
 		var sourceDownloadLinks = document.getElementsByClassName("sourceDownloadLink");
-		sourceDownloadLinks.forEach(link => {
+		var sourceDownloadLinksArray = [...sourceDownloadLinks];
+		sourceDownloadLinksArray.forEach(link => {
 			link.href = downloadBaseUrl + link.href;
 		});
 	</script>
