@@ -17,14 +17,94 @@ http://www.templatemo.com/preview/templatemo_421_raleway
 }
 
 .blue {
-	color: #3CF;
+    color: #3CF;
 }
 
 .green {
-	color: #0F0;
+    color: #0F0;
 }
 
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -33,7 +113,17 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     vertical-align: baseline;
 }
 
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
     display: block;
 }
 
@@ -41,15 +131,20 @@ body {
     line-height: 1;
 }
 
-ol,ul {
+ol,
+ul {
     list-style: none;
 }
 
-blockquote,q {
+blockquote,
+q {
     quotes: none;
 }
 
-blockquote:before,blockquote:after,q:before,q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
     content: '';
     content: none;
 }
@@ -63,7 +158,9 @@ html {
     box-sizing: border-box;
 }
 
-*,*:before,*:after {
+*,
+*:before,
+*:after {
     box-sizing: inherit;
 }
 
@@ -274,7 +371,7 @@ h2.welcome-title {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(169,91,195,0.9);
+    background: rgba(169, 91, 195, 0.9);
     text-align: center;
     opacity: 0;
     -webkit-transition: all 200ms ease-in-out;
@@ -561,7 +658,9 @@ span.offer-right {
 .blog-item {
     position: relative;
     overflow: hidden;
-    @extned %clearfix;;padding: 20px;
+    @extned %clearfix;
+    ;
+    padding: 20px;
     color: #6d747e;
     text-align: center;
     margin-bottom: 30px;
@@ -777,7 +876,8 @@ span.solid-line {
     margin: 30px 0;
 }
 
-.contact-form input,.contact-form textarea {
+.contact-form input,
+.contact-form textarea {
     background: #32353a;
     border: 0;
     outline: 0;
@@ -847,7 +947,7 @@ body {
     font-weight: 300;
     color: #b7bcbe;
     padding: 20px;
-    font-family: "Roboto",sans-serif;
+    font-family: "Roboto", sans-serif;
     line-height: 1.55;
     text-rendering: optimizeLegibility;
     -webkit-backface-visibility: hidden;
@@ -858,7 +958,12 @@ p {
     margin-bottom: 30px;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     text-transform: uppercase;
 }
 
@@ -887,7 +992,6 @@ h6 {
 }
 
 a {
-    color: #fff;
     text-decoration: none;
     -webkit-transition: all 100ms ease-in-out;
     -moz-transition: all 100ms ease-in-out;
@@ -952,7 +1056,8 @@ span[class*="border-"] {
     background: url("../img/shape-2.png") no-repeat;
 }
 
-.main-button,.main-footer .social li a {
+.main-button,
+.main-footer .social li a {
     color: #fff;
     text-transform: uppercase;
     font-size: 12px;
