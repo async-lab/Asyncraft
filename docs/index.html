@@ -310,7 +310,7 @@
 		var sourceDownloadLinks = document.getElementsByClassName("sourceDownloadLink");
 		var sourceDownloadLinksArray = [...sourceDownloadLinks];
 		sourceDownloadLinksArray.forEach(link => {
-			link.href = downloadBaseUrl + link.href;
+			link.href = downloadBaseUrl + link.href.split("/").pop();
 		});
 	</script>
 </body>
