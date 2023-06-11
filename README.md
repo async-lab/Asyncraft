@@ -1,2 +1,2 @@
 # Asyncraft
-A temporary minecraft server on cuit ssy
+A temporary minecraft server on cuit sty
