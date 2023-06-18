@@ -1,10 +1,3 @@
-<html>
-    <head>
-        <meta name="color-scheme" content="light dark">
-    </head>
-    <body>
-        <pre style="word-wrap: break-word; white-space: pre-wrap;">
-
 仅同步gitee，不维护格式，如需查看请前往已收集的问题.md · Rinkore/Minecraft-Maintenance-Documentation - Gitee.com
 
 视频介绍
@@ -131,7 +124,3 @@ Minecraft出现错误
 system.Io.InvalidDataException大佬这个问题是什么，这个是我装的1.8局域网联机mod，进不去游戏
 multimodal minecraft builtin/missing is empty这个怎么解决啊？
 缺少文件了吧，试试启动器的补全文件
-好的谢谢
-        </pre>
-    </body>
-</html>
