@@ -65,6 +65,7 @@ function parseDir(filename, parent = null) {
     tmpPath.splice(0, 1);
     tmpPath.map((name) => docPath = docPath + name + '/');
 
+
     //如果是文章
     if (path.basename(filename).endsWith('mdx') || path.basename(filename).endsWith('md')) {
       info.type = 'doc';
@@ -114,7 +115,7 @@ function sortItems(items) {
 }
 
 const sidebars = {
-  // tutorialSidebar: parseDir('docs/'),
+  // tutorialSidebar: parseDir('docs'),
 }
 
 module.exports = sidebars;
