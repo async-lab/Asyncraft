@@ -28,6 +28,9 @@ jobs:
       run: |
         npm install
         npm run-script build 
+    - name: CNAME
+      run: |
+        echo 'site.asyncraft.club' > ${{ github.workspace }}/build/CNAME
     - name: Deploy to Pages
       uses: peaceiris/actions-gh-pages@v3
       with:

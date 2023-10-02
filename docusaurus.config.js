@@ -122,6 +122,7 @@ const config = {
               }
             ]
           }, {
+            title: 'Banner',
             items: [
               {
                 html: '<img src="https://tietu.mclists.cn/banner/purple/7069/1.jpg" ></img>'
