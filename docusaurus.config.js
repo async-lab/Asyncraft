@@ -193,7 +193,7 @@ const config = {
       defer: true
     },
     {
-      src: '/js/favicon.js',
+      src: '/js/colorChangeIcon.js',
       async: true,
       defer: true
     },
