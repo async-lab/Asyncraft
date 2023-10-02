@@ -32,7 +32,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.TOKEN }}
-        publish_dir: ${{ runner.temp }}/build
+        publish_dir: ${{ github.workspace }}/build
         publish_branch: gh-pages
         destination_dir: .
 
