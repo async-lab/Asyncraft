@@ -119,6 +119,9 @@ const config = {
               {
                 label: 'Bilibili',
                 href: "https://space.bilibili.com/3494375627688733",
+              }, {
+                label: 'Zhihu',
+                href: "https://www.zhihu.com/people/asynclab"
               }
             ]
           }, {
