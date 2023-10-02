@@ -10,10 +10,12 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx(styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-      </div>
+      <center>
+        <div className="container">
+          <h1 className="hero__title">{siteConfig.title}</h1>
+          <p className="hero__subtitle">{siteConfig.tagline}</p>
+        </div>
+      </center>
     </header>
   );
 }
@@ -28,7 +30,7 @@ export default function Home() {
       <main>
         <center>
           <div>
-            <img src="img/qrcode.png" width="20%"></img>
+            <img src="img/qrcode.png" width="300px"></img>
           </div>
         </center>
       </main>
