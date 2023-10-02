@@ -1,0 +1,13 @@
+{
+    "MD033": {
+        "allowed_elements": [
+            "details",
+            "iframe",
+            "script"
+        ]
+    },
+    "MD013": {
+        "line_length": 1000
+    },
+    "MD024": false
+}
