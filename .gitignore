@@ -21,3 +21,5 @@ yarn-error.log*
 
 
 _site
+
+docusaurus.config.js.dump
