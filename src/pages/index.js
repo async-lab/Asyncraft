@@ -32,6 +32,7 @@ export default function Home() {
           <div>
             <img src="img/qrcode.png" width="300px"></img>
           </div>
+          <div style={{height:"200px"}}></div>
         </center>
       </main>
     </ Layout>
