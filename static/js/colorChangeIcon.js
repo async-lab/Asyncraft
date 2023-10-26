@@ -1,20 +1,25 @@
 const favicon_dark = '/img/favicon-dark.svg';
 const favicon_light = '/img/favicon-light.svg';
 
+function getTheme() { 
+    const html = document.querySelector('html');
+    if (html) return html.dataset.theme;
+    else return 'dark';
+}
+
 function setFavicon() {
     const faviconLink = document.querySelector('link[rel="icon"]');
     if (faviconLink) {
-        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        faviconLink.href = isDarkMode ? favicon_dark : favicon_light;
+        const isBrowserDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        faviconLink.href = isBrowserDarkMode ? favicon_dark : favicon_light;
     }
 }
 
 function setLogo() {
     const logos = document.querySelectorAll('.navbar__logo img');
-    const html = document.querySelector('html');
-    if (logos.length != 0 && html) {
+    if (logos.length != 0) {
         logos.forEach(logo => {
-            if (html.dataset.theme === 'dark') {
+            if (getTheme() === 'dark') {
                 logo.src = favicon_dark;
             } else {
                 logo.src = favicon_light;
@@ -26,13 +31,12 @@ function setLogo() {
 function setPic() {
     const img = document.querySelector('img.qq');
     const iframe = document.querySelector('iframe.kook');
-    const html = document.querySelector('html');
-    if (html.dataset.theme === 'light') {
-        if (img) img.src = '/img/qrcode-light.png';
-        if(iframe) iframe.src = iframe.src.replace('theme=dark', 'theme=light');
-    } else {
+    if (getTheme() === 'dark') {
         if (img) img.src = '/img/qrcode-dark.png';
         if(iframe) iframe.src = iframe.src.replace('theme=light', 'theme=dark');
+    } else {
+        if (img) img.src = '/img/qrcode-light.png';
+        if(iframe) iframe.src = iframe.src.replace('theme=dark', 'theme=light');
     }
 }
 
