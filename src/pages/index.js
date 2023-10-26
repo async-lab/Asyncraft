@@ -30,7 +30,8 @@ export default function Home() {
       <main>
         <center>
           <div>
-            <img src="img/qrcode.png" width="300px"></img>
+            <img className='qq' src="/img/qrcode-dark.png" width="300px" style={{ margin: "0 30px" }}></img>
+            <iframe className='kook' src="https://kookapp.cn/widget?id=5570057485746728&theme=dark" width="300" height="374.47" allowtransparency="true" frameborder="0"></iframe>
           </div>
           <div style={{height:"200px"}}></div>
         </center>

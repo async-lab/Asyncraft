@@ -23,16 +23,29 @@ function setLogo() {
     }
 }
 
+function setPic() {
+    const img = document.querySelector('img.qq');
+    const iframe = document.querySelector('iframe.kook');
+    const html = document.querySelector('html');
+    if (html.dataset.theme === 'light') {
+        if (img) img.src = '/img/qrcode-light.png';
+        if(iframe) iframe.src = iframe.src.replace('theme=dark', 'theme=light');
+    } else {
+        if (img) img.src = '/img/qrcode-dark.png';
+        if(iframe) iframe.src = iframe.src.replace('theme=light', 'theme=dark');
+    }
+}
+
 // 如果你希望在颜色模式更改时更新 favicon，你可以添加以下代码
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setFavicon);
 
 window.addEventListener('load', event => {
     setFavicon();
-    new MutationObserver(setFavicon).observe(document.head, { childList: true });
+    setInterval(setFavicon, 100);
 
     setLogo();
     new MutationObserver(setLogo).observe(document.querySelector('html'), { attributes: true });
-});
 
-//即时更新（残疾
-setInterval(setFavicon, 100);
+    setPic();
+    new MutationObserver(setPic).observe(document.querySelector('html'), { attributes: true });
+});
