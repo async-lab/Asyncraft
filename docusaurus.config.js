@@ -95,6 +95,11 @@ const config = {
             position: 'left',
             label: '资源',
             docId: '资源',
+          },{
+            type: 'doc',
+            position: 'left',
+            label: '组织',
+            docId: '组织',
           },
         ],
       },
