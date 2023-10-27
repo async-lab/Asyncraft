@@ -199,14 +199,16 @@ const config = {
       src: '/js/mobileFingerMenu.js',
       async: true,
       defer: true
-    },
-    {
+    },{
       src: '/js/colorChangeIcon.js',
       async: true,
       defer: true
-    },
-    {
+    },{
       src: '/js/sidebarLinkCategoryCollapsible.js',
+      async: true,
+      defer: true
+    },{
+      src: '/js/UrlFormatter.js',
       async: true,
       defer: true
     }
