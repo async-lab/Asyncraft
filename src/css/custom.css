@@ -21,8 +21,10 @@
   --blockquote-color: #787a8a;
   --theme-svg-invert: 0%;
 
-  --ifm-heading-font-family: "CKTKingkong";
+  /* --ifm-heading-font-family: "CKTKingkong"; */
   /* --ifm-font-family-base: "CKTKingkong"; */
+
+  --ckt-font-family: "CKTKingkong";
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -113,6 +115,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
 }
 
 /* 导航栏Logo文字 */
-.navbar__title {
-  font-family: var(--ifm-heading-font-family);
+.navbar__title,
+.hero__title {
+  font-family: var(--ckt-font-family);
 }
