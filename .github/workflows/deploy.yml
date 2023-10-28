@@ -27,7 +27,7 @@ jobs:
     - name: Install and Build
       run: |
         npm install
-        npm audit fix --force
+        npm audit fix
         echo ' [Action Info] Installation has finished!'
         npm run build 
     - name: CNAME
