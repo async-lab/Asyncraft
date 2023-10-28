@@ -24,6 +24,10 @@
   /* --ifm-heading-font-family: "CKTKingkong"; */
   /* --ifm-font-family-base: "CKTKingkong"; */
 
+  /* --ifm-font-weight-light: 100;
+  --ifm-font-weight-normal: 100;
+  --ifm-font-weight-semibold: 100;
+  --ifm-font-weight-bold: 100; */
   --ckt-font-family: "CKTKingkong";
 }
 
@@ -111,7 +115,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
 /* 字体 */
 @font-face {
   font-family: "CKTKingkong";
-  src: url("/font/CKTKingkong.TTF") format("truetype");
+  src: url("/font/CKTKingkong.ttf") format("truetype");
 }
 
 /* 导航栏Logo文字 */
