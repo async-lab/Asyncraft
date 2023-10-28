@@ -109,7 +109,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
 /* 字体 */
 @font-face {
   font-family: "CKTKingkong";
-  src: url("/font/CKTKingkong.ttf") format("truetype");
+  src: url("CKTKingkong.ttf") format("truetype");
 }
 
 /* 导航栏Logo文字 */
