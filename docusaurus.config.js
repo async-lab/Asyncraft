@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 const projectName = 'Asyncraft'
 const github = 'https://github.com/Async-Lab'
-const githubPagesUrl = 'https://www.asyncraft.club'
+const githubPagesUrl = 'https://site.asyncraft.club'
 const baseUrl = '/'
 const repo = 'https://github.com/Async-Lab/Asyncraft'
 
