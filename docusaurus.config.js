@@ -208,11 +208,6 @@ const config = {
       async: true,
       defer: true
     }
-    // ,{
-    //   src: '/js/UrlFormatter.js',
-    //   async: true,
-    //   defer: true
-    // }
   ]
 };
 
