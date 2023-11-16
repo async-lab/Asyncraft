@@ -207,11 +207,12 @@ const config = {
       src: '/js/sidebarLinkCategoryCollapsible.js',
       async: true,
       defer: true
-    },{
-      src: '/js/UrlFormatter.js',
-      async: true,
-      defer: true
     }
+    // ,{
+    //   src: '/js/UrlFormatter.js',
+    //   async: true,
+    //   defer: true
+    // }
   ]
 };
 
