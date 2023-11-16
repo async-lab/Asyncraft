@@ -100,6 +100,11 @@ const config = {
             position: 'left',
             label: '组织',
             docId: '组织',
+          },{
+            type: 'doc',
+            position: 'left',
+            label: '活动',
+            docId: '活动',
           },
         ],
       },
