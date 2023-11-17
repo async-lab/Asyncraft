@@ -29,7 +29,7 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <center>
-          <h1 style={{fontFamily:"CKTKingkong"}}>Java版/基岩版互通</h1>
+          <h1 className="sub__title" style={{fontFamily:"CKTKingkong"}}>Java版/基岩版互通</h1>
           <div>
             <img className='qq' src="/img/qrcode-dark.png" width="300px" style={{ margin: "0 30px" }}></img>
             {/* <iframe className='kook' src="https://kookapp.cn/widget?id=5570057485746728&theme=dark" width="300" height="374.47" allowtransparency="true" frameborder="0"></iframe> */}

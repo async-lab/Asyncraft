@@ -120,7 +120,8 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
 
 /* 导航栏Logo文字 */
 .navbar__title,
-.hero__title {
+.hero__title,
+.sub__title {
   font-family: var(--ckt-font-family);
   font-weight: 500 !important;
 }
