@@ -86,10 +86,10 @@ const config = {
             label: '介绍',
             docId: '介绍',
           }, {
-            type: 'doc',
+            type: 'docSidebar',
             position: 'left',
             label: '教程',
-            docId: '教程',
+            sidebarId: 'tutorialSidebar',
           }, {
             type: 'doc',
             position: 'left',
