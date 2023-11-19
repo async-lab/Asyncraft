@@ -105,6 +105,11 @@ const config = {
             position: 'left',
             label: '活动',
             docId: '活动',
+          },{
+            type: 'doc',
+            position: 'left',
+            label: '地图',
+            docId: '地图',
           },
         ],
       },
