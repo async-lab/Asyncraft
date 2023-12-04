@@ -20,7 +20,7 @@ const { languages } = require('prismjs');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: projectName,
-  tagline: 'Async实验室旗下的Minecraft社区',
+  tagline: 'Async实验室旗下的Minecraft服务器',
   favicon: 'img/favicon-dark.svg',
 
   // Set the production url of your site here
