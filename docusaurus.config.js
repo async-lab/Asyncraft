@@ -3,8 +3,7 @@
 
 const docusaurus = 'https://www.docusaurus.io/zh-CN/'
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import {themes as prismThemes} from 'prism-react-renderer';
 
 const projectName = 'Asyncraft'
 const github = 'https://github.com/Async-Lab'
@@ -155,8 +154,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} ${projectName}, Inc. Built with <a href="${docusaurus}">Docusaurus</a>.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
       colorMode: {
         defaultMode: 'dark',
