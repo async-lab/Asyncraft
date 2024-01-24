@@ -82,6 +82,11 @@ const config = {
           {
             type: 'doc',
             position: 'left',
+            label: '服务器列表',
+            docId: '服务器列表',
+          },{
+            type: 'doc',
+            position: 'left',
             label: '介绍',
             docId: '介绍',
           }, {
