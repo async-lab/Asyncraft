@@ -10,6 +10,7 @@ const github = 'https://github.com/Async-Lab'
 const githubPagesUrl = 'https://site.asyncraft.club'
 const baseUrl = '/'
 const repo = 'https://github.com/Async-Lab/Asyncraft'
+const officialSite = 'https://www.asyncraft.club'
 
 const math = require('remark-math');
 const katex = require('rehype-katex');
@@ -121,14 +122,18 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Github',
+            title: 'Links',
             items: [
               {
-                label: 'Async Lab',
+                label: 'Async Lab Official Site',
+                href: officialSite,
+              },
+              {
+                label: 'Async Lab Github',
                 href: github,
               },
               {
-                label: 'Asyncraft',
+                label: 'Asyncraft Github',
                 href: repo,
               }
             ],
