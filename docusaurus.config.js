@@ -10,7 +10,7 @@ const github = 'https://github.com/Async-Lab'
 const githubPagesUrl = 'https://site.asyncraft.club'
 const baseUrl = '/'
 const repo = 'https://github.com/Async-Lab/Asyncraft'
-const officialSite = 'https://www.asyncraft.club'
+const officialSite = 'https://www.asynclab.club'
 
 const math = require('remark-math');
 const katex = require('rehype-katex');
