@@ -85,7 +85,7 @@ const config = {
             position: 'left',
             label: '服务器列表',
             docId: '服务器列表',
-          },{
+          }, {
             type: 'doc',
             position: 'left',
             label: '介绍',
@@ -95,7 +95,7 @@ const config = {
             position: 'left',
             label: '教程',
             sidebarId: 'tutorialSidebar',
-          }, {
+          },{
             type: 'doc',
             position: 'left',
             label: '资源',
@@ -115,6 +115,11 @@ const config = {
             position: 'left',
             label: '地图',
             docId: '地图',
+          },{
+            type: 'doc',
+            position: 'left',
+            label: '留言板',
+            docId: '留言板',
           },
         ],
       },
