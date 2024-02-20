@@ -219,10 +219,6 @@ const config = {
       src: '/js/videoIframe.js',
       async: true,
       defer: true
-    }, {
-      src: '/js/mobileFingerMenu.js',
-      async: true,
-      defer: true
     },{
       src: '/js/colorChangeIcon.js',
       async: true,
