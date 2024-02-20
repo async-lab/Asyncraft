@@ -1,3 +1,5 @@
+// 自适应iframe视频大小
+
 function handleIframe() {
     const iframes = document.querySelectorAll('iframe.videoIframe');
 

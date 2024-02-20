@@ -1,4 +1,6 @@
-function formatURL(){
+// 在所有页面URL后面添加斜杠("/")，以避免重定向
+
+function formatURL() {
     // 获取当前路径
     var currentPath = window.location.pathname;
 
