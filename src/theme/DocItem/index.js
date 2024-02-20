@@ -27,7 +27,7 @@ export default function DocItemWrapper(props) {
           reactionsEnabled="0"
           emitMetadata="0"
           inputPosition="bottom"
-          theme="dark_dimmed"
+          theme="transparent_dark"
           lang="zh-CN"
           loading="lazy"
         />
