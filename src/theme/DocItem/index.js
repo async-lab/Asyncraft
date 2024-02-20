@@ -1,8 +1,7 @@
 import React from 'react';
 import DocItem from '@theme-original/DocItem';
-import { DiscussionEmbed } from 'disqus-react'
+import Giscus from '@giscus/react';
 
-const githubPagesUrl = 'https://site.asyncraft.club'
 
 export default function DocItemWrapper(props) {
   const { metadata } = props.content
@@ -12,15 +11,28 @@ export default function DocItemWrapper(props) {
   return (
     <>
       <DocItem {...props} />
-      {comments && (<DiscussionEmbed
-        shortname='asyncraft'
-        config={{
-          url: githubPagesUrl + slug,
-          identifier: slug,
-          title: title,
-          language: 'zh_CN',
-        }}
-      />)}
+      {comments && (
+        <div>
+        <Giscus
+          id="comments"
+          // highlight-warn-start
+          repo="Async-Lab/Asyncraft"
+          repoId="R_kgDOJjWTSg"
+          category="Comments"
+          categoryId="DIC_kwDOJjWTSs4CdYHH"
+          // highlight-warn-end
+          mapping="title"
+          strict="1"
+          term="Welcome to @giscus/react component!"
+          reactionsEnabled="0"
+          emitMetadata="0"
+          inputPosition="bottom"
+          theme="dark_dimmed"
+          lang="zh-CN"
+          loading="lazy"
+        />
+      </div>
+      )}
       
     </>
   );
