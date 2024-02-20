@@ -40,6 +40,17 @@ function setPic() {
     }
 }
 
+function setGiscus() {
+    const giscus = document.querySelector('giscus-widget');
+    if (giscus) {
+        if (getTheme() === 'dark') {
+            giscus.theme = "transparent_dark";
+        } else {
+            giscus.theme = "light";
+        }
+    }
+}
+
 // 如果你希望在颜色模式更改时更新 favicon，你可以添加以下代码
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setFavicon);
 
@@ -52,4 +63,7 @@ window.addEventListener('load', event => {
 
     setPic();
     new MutationObserver(setPic).observe(document.querySelector('html'), { attributes: true });
+
+    setGiscus();
+    new MutationObserver(setGiscus).observe(document.querySelector('html'), { attributes: true });
 });
