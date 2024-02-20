@@ -34,7 +34,7 @@ export default function Home() {
             <img className='qq' src="/img/qrcode-dark.png" width="300px" style={{ margin: "0 30px" }}></img>
             {/* <iframe className='kook' src="https://kookapp.cn/widget?id=5570057485746728&theme=dark" width="300" height="374.47" allowtransparency="true" frameborder="0"></iframe> */}
             <a href="https://kook.top/ZpHV6s">
-              <img className='qq' src="/img/kook.png" width="300px" style={{ margin: "0 30px" }}>
+              <img src="/img/kook.png" width="300px" style={{ margin: "0 30px" }}>
               </img>
             </a>
           </div>

@@ -3,7 +3,7 @@
 
 const docusaurus = 'https://www.docusaurus.io/zh-CN/'
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 const projectName = 'Asyncraft'
 const github = 'https://github.com/Async-Lab'
@@ -95,27 +95,27 @@ const config = {
             position: 'left',
             label: '教程',
             sidebarId: 'tutorialSidebar',
-          },{
+          }, {
             type: 'doc',
             position: 'left',
             label: '资源',
             docId: '资源',
-          },{
+          }, {
             type: 'doc',
             position: 'left',
             label: '组织',
             docId: '组织',
-          },{
+          }, {
             type: 'doc',
             position: 'left',
             label: '活动',
             docId: '活动',
-          },{
+          }, {
             type: 'doc',
             position: 'left',
             label: '地图',
             docId: '地图',
-          },{
+          }, {
             type: 'doc',
             position: 'left',
             label: '留言板',
@@ -216,20 +216,24 @@ const config = {
 
   scripts: [
     {
-      src: '/js/videoIframe.js',
+      src: '/js/VideoIframe.js',
       async: true,
       defer: true
-    },{
-      src: '/js/colorChangeIcon.js',
+    }, {
+      src: '/js/ThemeStrategy.js',
       async: true,
       defer: true
-    },{
-      src: '/js/sidebarLinkCategoryCollapsible.js',
+    }, {
+      src: '/js/SidebarLinkCategoryCollapsible.js',
       async: true,
       defer: true
-    },{
+    }, {
       src: '/js/UrlFormatter.js',
       async: true,
+      defer: true
+    }
+    , {
+      src: '/js/main.js',
       defer: true
     }
   ]
