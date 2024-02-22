@@ -27,7 +27,6 @@ export default function DocItemWrapper(props) {
             reactionsEnabled="0"
             emitMetadata="0"
             inputPosition="top"
-            defaultCommentOrder="newest"
             theme="transparent_dark"
             lang="zh-CN"
             loading="lazy"
