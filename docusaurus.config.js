@@ -8,6 +8,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const projectName = 'Asyncraft'
 const github = 'https://github.com/Async-Lab'
 const githubPagesUrl = 'https://site.asyncraft.club'
+const cuitUrl = 'https://www.cuit.edu.cn'
 const baseUrl = '/'
 const repo = 'https://github.com/Async-Lab/Asyncraft'
 const officialSite = 'https://www.asynclab.club'
@@ -127,34 +128,34 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Links',
+            title: '链接',
             items: [
               {
-                label: 'Async Lab Official Site',
+                label: '异步实验室',
                 href: officialSite,
               },
               {
-                label: 'Async Lab Github',
-                href: github,
+                label: 'Github仓库',
+                href: repo,
               },
               {
-                label: 'Asyncraft Github',
-                href: repo,
-              }
+                label: '成都信息工程大学',
+                href: cuitUrl,
+              },
             ],
           }, {
-            title: 'Social Media',
+            title: '社交媒体',
             items: [
               {
                 label: 'Bilibili',
                 href: "https://space.bilibili.com/3494375627688733",
               }, {
-                label: 'Zhihu',
+                label: '知乎',
                 href: "https://www.zhihu.com/people/asynclab"
               }
             ]
           }, {
-            title: 'Banner',
+            title: '横幅',
             items: [
               {
                 html: '<img src="https://tietu.mclists.cn/banner/purple/7069/1.jpg" ></img>'
