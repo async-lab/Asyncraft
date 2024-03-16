@@ -9,6 +9,7 @@ sidebar_position: 4
 + [方法一](https://www.bilibili.com/read/cv24474600/)
 + 方法二：用第三方登录，比如Little Skin
 + 方法三：在启动和加载的时候全程断网，进入服务器的时候再联网
++ 方法四：[离线多人修正模组](https://www.mcmod.cn/class/10643.html)
 
 ## 缺少个人信息公钥
 
