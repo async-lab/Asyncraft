@@ -115,7 +115,8 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
 /* 字体 */
 @font-face {
   font-family: "CKTKingkong";
-  src: url("/font/CKTKingkong.woff2") format("woff2")
+  src: url("/font/CKTKingkong.woff2") format("woff2");
+  font-display: swap;
 }
 
 /* 导航栏Logo文字 */
