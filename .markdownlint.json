@@ -3,7 +3,8 @@
         "allowed_elements": [
             "details",
             "iframe",
-            "script"
+            "script",
+            "br"
         ]
     },
     "MD013": {
