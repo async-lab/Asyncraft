@@ -104,16 +104,6 @@ const config = {
           }, {
             type: 'doc',
             position: 'left',
-            label: '组织',
-            docId: '组织',
-          }, {
-            type: 'doc',
-            position: 'left',
-            label: '活动',
-            docId: '活动',
-          }, {
-            type: 'doc',
-            position: 'left',
             label: '地图',
             docId: '地图',
           }, {
@@ -121,7 +111,22 @@ const config = {
             position: 'left',
             label: '留言板',
             docId: '留言板',
-          },
+          }, {
+            type: 'dropdown',
+            label: '其他',
+            position: 'left',
+            items: [
+              {
+                type: 'doc',
+                label: '组织',
+                docId: '组织',
+              }, {
+                type: 'doc',
+                label: '活动',
+                docId: '活动',
+              }
+            ]
+          }
         ],
       },
       footer: {
