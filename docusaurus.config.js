@@ -107,11 +107,6 @@ const config = {
             label: '地图',
             docId: '地图',
           }, {
-            type: 'doc',
-            position: 'left',
-            label: '留言板',
-            docId: '留言板',
-          }, {
             type: 'dropdown',
             label: '其他',
             position: 'left',
@@ -124,6 +119,10 @@ const config = {
                 type: 'doc',
                 label: '活动',
                 docId: '活动',
+              }, {
+                type: 'doc',
+                label: '留言板',
+                docId: '留言板',
               }
             ]
           }
