@@ -31,7 +31,7 @@ const BackgroundImageComponent = () => {
 
   const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
 
-  const fetchImages = async () => {
+  const fetchImages = () => {
     try {
       const images = imageContext.keys();
       const randomImage = images[Math.floor(Math.random() * images.length)];
