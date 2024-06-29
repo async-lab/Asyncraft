@@ -47,7 +47,6 @@ const BackgroundImageComponent = () => {
 
   useEffect(() => {
     fetchImages();
-    setOpacity(maxOpacity);
 
     const interval = setInterval(() => {
       setOpacity(0);
