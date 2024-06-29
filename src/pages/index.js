@@ -69,6 +69,7 @@ const BackgroundImageComponent = () => {
         zIndex: -999,
         width: '100%',
         height: '100%',
+        objectFit: 'cover',
         filter: `blur(1.5px) opacity(${opacity})`,
         transition: `filter ${transitionDuration}ms ease`,
       }}
