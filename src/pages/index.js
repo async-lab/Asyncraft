@@ -31,7 +31,7 @@ const BackgroundImageComponent = () => {
 
   const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
 
-  const fetchImages = () => {
+  const fetchImages = async () => {
     try {
       const images = imageContext.keys();
       const randomImage = images[Math.floor(Math.random() * images.length)];
@@ -51,9 +51,9 @@ const BackgroundImageComponent = () => {
 
     const interval = setInterval(() => {
       setOpacity(0);
+      fetchImages();
 
       setTimeout(() => {
-        fetchImages();
         setOpacity(maxOpacity);
       }, transitionDuration);
     }, transitionDuration + stayDuration);
