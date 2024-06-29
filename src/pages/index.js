@@ -31,7 +31,7 @@ const BackgroundImageComponent = () => {
 
   const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
 
-  const fetchImages = async () => {
+  const fetchImages = () => {
     try {
       const images = imageContext.keys();
       const randomImage = images[Math.floor(Math.random() * images.length)];
@@ -51,27 +51,25 @@ const BackgroundImageComponent = () => {
 
     const interval = setInterval(() => {
       setOpacity(0);
-      fetchImages();
 
       setTimeout(() => {
-        setOpacity(maxOpacity);
+        fetchImages();
       }, transitionDuration);
     }, transitionDuration + stayDuration);
+
+    const bg = document.querySelector('#background-image');
+    bg.addEventListener('load', () => setOpacity(maxOpacity));
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div id='background-image'
+    <img id='background-image' src={`${backgroundImage}`}
       style={{
-        backgroundImage: `url(${backgroundImage})`,
         position: 'fixed',
         zIndex: -999,
         width: '100%',
         height: '100%',
-        backgroundSize: 'auto',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         filter: `blur(1.5px) opacity(${opacity})`,
         transition: `filter ${transitionDuration}ms ease`,
       }}
