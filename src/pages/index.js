@@ -9,7 +9,7 @@ import styles from './index.module.css';
 
 const transitionDuration = 2000;
 const stayDuration = 10000;
-const maxOpacity = 0.25
+const maxOpacity = 0.2
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
