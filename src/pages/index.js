@@ -27,39 +27,45 @@ function HomepageHeader() {
 
 const BackgroundImageComponent = () => {
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [imageIndex, setImageIndex] = useState(0);
   const [opacity, setOpacity] = useState(0);
 
-  const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
-
-  const fetchImages = () => {
-    try {
-      const images = imageContext.keys();
-      const randomImage = images[Math.floor(Math.random() * images.length)];
-      if (backgroundImage === `/img/背景/${randomImage}` && images.length > 1) {
-        fetchImages();
-        return;
-      }
-      setBackgroundImage(`/img/背景/${randomImage}`);
-    } catch (error) {
-      console.error('Error fetching images:', error);
-    }
-  };
-
   useEffect(() => {
-    fetchImages();
+    const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
+    const images = imageContext.keys()
+      .map((key) => key.replace('./', ''))
+      .sort(() => Math.random() - 0.5);
+
+    const rotateImages = () => {
+      try {
+        setImageIndex((prevIndex) => {
+          setBackgroundImage(`/img/背景/${images[prevIndex]}`);
+          return (prevIndex + 1) % images.length;
+        });
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    rotateImages();
 
     const interval = setInterval(() => {
       setOpacity(0);
 
       setTimeout(() => {
-        fetchImages();
+        rotateImages();
       }, transitionDuration);
     }, transitionDuration + stayDuration);
 
-    const bg = document.querySelector('#background-image');
-    bg.addEventListener('load', () => setOpacity(maxOpacity));
+    const handleLoad = () => setOpacity(maxOpacity);
 
-    return () => clearInterval(interval);
+    const bg = document.querySelector('#background-image');
+    bg.addEventListener('load', handleLoad);
+
+    return () => {
+      bg.removeEventListener('load', handleLoad);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
