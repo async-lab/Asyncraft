@@ -222,15 +222,12 @@ const config = {
   scripts: [
     {
       src: '/js/VideoIframe.js',
-      async: true,
       defer: true
     }, {
       src: '/js/ThemeStrategy.js',
-      async: true,
       defer: true
     }, {
       src: '/js/UrlFormatter.js',
-      async: true,
       defer: true
     }
     , {
