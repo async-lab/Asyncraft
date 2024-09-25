@@ -95,7 +95,9 @@ export default function Home() {
         <center>
           <h1 className="sub__title">Java版/基岩版互通</h1>
           <div>
-            <img className='qq' src="/img/qrcode-dark.png" width="300px" style={{ margin: "0 30px" }} />
+            <a href='https://qm.qq.com/q/sNFR2i8hWg'>
+              <img className='qq' src="/img/qrcode-dark.png" width="300px" style={{ margin: "0 30px" }} />
+            </a>
             <a href="https://kook.top/ZpHV6s">
               <img src="/img/kook.png" width="300px" style={{ margin: "0 30px" }} />
             </a>
