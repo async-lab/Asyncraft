@@ -15,13 +15,16 @@ jobs:
         uses: actions/checkout@main
         with:
           persist-credentials: false
+
       - name: Install and Build
         run: |
           npm install
           npm run build
+
       - name: CNAME
         run: |
           echo 'site.asyncraft.club' > ${{ github.workspace }}/build/CNAME
+
       - name: Deploy to Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
