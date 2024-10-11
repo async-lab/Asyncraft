@@ -9,25 +9,23 @@ jobs:
       group: release
       cancel-in-progress: true
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout
-      uses: actions/checkout@main
-      with:
-        persist-credentials: false
-    - name: Install and Build
-      run: |
-        npm install --legacy-peer-deps
-        echo ' [Action Info] Installation has finished!'
-        npm run build 
-    - name: CNAME
-      run: |
-        echo 'site.asyncraft.club' > ${{ github.workspace }}/build/CNAME
-    - name: Deploy to Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ github.workspace }}/build
-        publish_branch: gh-pages
-        destination_dir: .
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          persist-credentials: false
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+      - name: CNAME
+        run: |
+          echo 'site.asyncraft.club' > ${{ github.workspace }}/build/CNAME
+      - name: Deploy to Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ github.workspace }}/build
+          publish_branch: gh-pages
+          destination_dir: .
