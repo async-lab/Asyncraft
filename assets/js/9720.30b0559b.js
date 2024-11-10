@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasyncraft=self.webpackChunkasyncraft||[]).push([[9720],{9720:(e,c,a)=>{a.d(c,{createArchitectureServices:()=>r.S});var r=a(9936);a(9369)}}]);
