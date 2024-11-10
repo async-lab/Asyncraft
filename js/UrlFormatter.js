@@ -1,0 +1,1 @@
+function formatURL(){var t=window.location.pathname;"/"===t||t.endsWith("/")||history.replaceState({},"",t+"/")}setInterval(formatURL,100);

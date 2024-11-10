@@ -1,0 +1,1 @@
+function handleIframe(){document.querySelectorAll("iframe.videoIframe").forEach((function(e){const n=e.offsetWidth;0!=n&&(e.style.height=9*n/16+"px")}))}window.addEventListener("resize",handleIframe),window.addEventListener("load",(e=>{handleIframe(),new MutationObserver((function(e){handleIframe()})).observe(document.body,{childList:!0,subtree:!0})}));
