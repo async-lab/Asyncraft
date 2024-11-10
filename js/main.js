@@ -1,1 +1,32 @@
-const favicon_dark="/img/favicon-dark.svg",favicon_light="/img/favicon-light.svg";new ThemeStrategy('link[rel="icon"]',(e=>e.href=favicon_dark),(e=>e.href=favicon_light)),new ThemeStrategy(".navbar__logo img",(e=>e.src=favicon_dark),(e=>e.src=favicon_light)),new ThemeStrategy("img.qq",(e=>e.src="/img/qrcode-dark.png"),(e=>e.src="/img/qrcode-light.png")),new ThemeStrategy("iframe.kook",(e=>e.src=e.src.replace("theme=light","theme=dark")),(e=>e.src=e.src.replace("theme=dark","theme=light"))),new ThemeStrategy("giscus-widget",(e=>e.theme="transparent_dark"),(e=>e.theme="light"));
+const favicon_dark = '/img/favicon-dark.svg';
+const favicon_light = '/img/favicon-light.svg';
+
+// favicon 策略
+new ThemeStrategy('link[rel="icon"]',
+    element => element.href = favicon_dark,
+    element => element.href = favicon_light
+);
+
+// logo 策略
+new ThemeStrategy('.navbar__logo img',
+    element => element.src = favicon_dark,
+    element => element.src = favicon_light
+);
+
+// 图片策略
+new ThemeStrategy('img.qq',
+    element => element.src = '/img/qrcode-dark.png',
+    element => element.src = '/img/qrcode-light.png'
+);
+
+// iframe.kook 策略
+new ThemeStrategy('iframe.kook',
+    element => element.src = element.src.replace('theme=light', 'theme=dark'),
+    element => element.src = element.src.replace('theme=dark', 'theme=light')
+);
+
+// giscus 策略
+new ThemeStrategy('giscus-widget',
+    element => element.theme = "transparent_dark",
+    element => element.theme = "light"
+);
