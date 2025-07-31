@@ -35,6 +35,7 @@ class ThemeStrategy {
                     darkStrategy(element);
                 } else {
                     lightStrategy(element);
+                    console.log(element);
                 }
             });
         }
