@@ -9,7 +9,7 @@ import styles from './index.module.css';
 
 const transitionDuration = 2000;
 const stayDuration = 10000;
-const maxOpacity = 0.2
+const maxOpacity = 0.15
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -95,7 +95,7 @@ export default function Home() {
         <center>
           <h1 className="sub__title">Java版/基岩版互通</h1>
           <div>
-            <a href='https://qm.qq.com/q/sNFR2i8hWg'>
+            <a href='https://qm.qq.com/q/yh2Rk8uxH2'>
               <img className='qq' src="/img/qrcode-dark.png" width="300px" style={{ margin: "0 30px" }} />
             </a>
             <a href="https://kook.top/ZpHV6s">

@@ -16,7 +16,6 @@ const officialSite = 'https://www.asynclab.club'
 const math = require('remark-math');
 const katex = require('rehype-katex');
 const sidebars = require('./sidebars');
-const { languages } = require('prismjs');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -78,7 +77,8 @@ const config = {
         title: projectName,
         logo: {
           alt: 'My Site Logo',
-          src: 'img/favicon-dark.svg',
+          src: 'img/favicon-light.svg',
+          srcDark: 'img/favicon-dark.svg',
         },
         items: [
           {
@@ -176,6 +176,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        additionalLanguages: ['haskell', 'java'],
       },
       colorMode: {
         defaultMode: 'dark',
