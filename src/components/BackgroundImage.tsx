@@ -23,7 +23,7 @@ const BackgroundImageComponent = () => {
       clearTimeout(fadeOutTimeout);
       clearTimeout(changeImageTimeout);
     };
-  }, [images.length]);
+  }, []);
 
   useEffect(() => {
     if (!images || images.length === 0) {
