@@ -64,7 +64,7 @@ export default function Home(): JSX.Element {
                                 <img
                                     className={link.imgClass}
                                     src={link.src}
-                                    width="300px"
+                                    height="400px"
                                     style={{ margin: "0 30px" }}
                                     alt={link.alt}
                                 />

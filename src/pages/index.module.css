@@ -42,11 +42,18 @@
   }
 }
 
+:root {
+  --social-link-shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --social-link-shadow-color: rgba(255, 255, 255, 0.1);
+}
+
 .socialLink {
   display: inline-block;
   animation: gentle-float 2s ease-in-out infinite;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  height: 400px;
+  filter: drop-shadow(0px 5px 15px var(--social-link-shadow-color));
 }
 
 .socialLink:first-of-type {
@@ -58,9 +65,5 @@
 }
 
 .socialLink:hover {
-  transform: scale(1.1);
-  animation-name: juicy-shake;
-  animation-duration: 0.3s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+  animation: juicy-shake 0.3s ease-in-out infinite;
 }
