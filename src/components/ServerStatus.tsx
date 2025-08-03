@@ -171,7 +171,7 @@ const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
 const containerColor = 'var(--ifm-code-background)';
 const borderColor = 'var(--ifm-table-border-color)';
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
     loadingContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -180,22 +180,20 @@ const styles = {
         border: `1px solid ${borderColor}`,
         borderRadius: '8px',
         backgroundColor: containerColor,
-        fontColor: 'var(--ifm-font-color-base)'
+        color: 'var(--ifm-font-color-base)'
     },
     errorContainer: {
         padding: '10px',
         border: '1px solid #f44336',
         borderRadius: '8px',
-        color: '#f44336',
         backgroundColor: '#ffdddd',
-        fontColor: 'var(--ifm-font-color-base)'
+        color: 'var(--ifm-font-color-base)'
     },
     offlineContainer: {
         padding: '10px',
         borderLeft: '4px solid #f44336',
-        color: '#333',
         backgroundColor: '#ffdddd',
-        fontColor: 'var(--ifm-font-color-base)'
+        color: 'var(--ifm-font-color-base)'
     },
     motdContainer: {
         padding: '20px',
@@ -203,7 +201,7 @@ const styles = {
         borderRadius: '8px',
         backgroundColor: containerColor,
         backdropFilter: 'blur(5px)',
-        fontColor: 'var(--ifm-font-color-base)'
+        color: 'var(--ifm-font-color-base)'
     },
     motdContent: {
         display: 'flex',
