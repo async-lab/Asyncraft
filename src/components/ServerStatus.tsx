@@ -224,7 +224,7 @@ const styles = {
         borderRadius: '8px',
         flexGrow: '1',
         backgroundColor: 'rgba(0, 0, 0)',
-        fontFamily: '"Minecraft", "Fira Code", monospace',
+        fontFamily: 'var(--mc-font-family), "Fira Code", monospace',
         lineHeight: '1.5',
         color: '#AAAAAA',
     }
