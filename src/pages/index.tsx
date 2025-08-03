@@ -25,13 +25,11 @@ const socialLinks = [
     {
         href: 'https://qm.qq.com/q/yh2Rk8uxH2',
         src: '/img/qrcode-dark.png',
-        imgClass: 'qq',
         alt: 'QQ Group QR Code'
     },
     {
         href: 'https://kook.top/ZpHV6s',
         src: '/img/kook.png',
-        imgClass: '',
         alt: 'KOOK Server QR Code'
     },
 ];
@@ -63,10 +61,9 @@ export default function Home(): JSX.Element {
                                     onMouseLeave={() => setHoveredIndex(null)}
                                 >
                                     <img
-                                        className={link.imgClass}
                                         src={link.src}
                                         height="400px"
-                                        style={{ margin: "0 30px" }}
+                                        style={{ margin: "30px" }}
                                         alt={link.alt}
                                     />
                                     {/* <ParticleFirework show={hoveredIndex == i} parentRef={{ current: parentRefs.current[i] }} /> */}
