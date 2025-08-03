@@ -46,12 +46,12 @@ export default function Home(): JSX.Element {
             title={`Hello from ${siteConfig.title}`}
             description="Description will go into a meta tag in <head />">
 
-            <div className={styles.fullPage}>
+            <div className={styles.pageContent}>
                 <HomepageHeader />
                 <main>
                     <center>
                         <h1 className="sub__title">Java版/基岩版互通</h1>
-                        <div style={{ marginTop: "50px", marginBottom: "150px" }}>
+                        <div style={{ marginTop: "50px", marginBottom: "200px" }}>
                             {socialLinks.map((link, i) => (
                                 <a
                                     key={link.href}
@@ -75,8 +75,8 @@ export default function Home(): JSX.Element {
                         </div>
                     </center>
                 </main>
-                <BackgroundImageComponent />
             </div>
+            <BackgroundImageComponent />
         </Layout>
     );
 }
