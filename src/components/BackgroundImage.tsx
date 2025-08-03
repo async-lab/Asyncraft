@@ -5,7 +5,7 @@ const stayDuration = 10000;
 const maxOpacity = 0.15;
 
 const BackgroundImageComponent = () => {
-  const [images] = useState(() => {
+  const [images, setImages] = useState(() => {
     const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
     return imageContext.keys()
       .map(key => key.replace('./', ''))
@@ -23,6 +23,10 @@ const BackgroundImageComponent = () => {
       clearTimeout(fadeOutTimeout);
       clearTimeout(changeImageTimeout);
     };
+  }, []);
+
+  useEffect(() => {
+    setImages(images.sort(() => Math.random() - 0.5));
   }, []);
 
   useEffect(() => {
