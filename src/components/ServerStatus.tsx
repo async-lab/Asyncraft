@@ -213,6 +213,7 @@ const styles = {
         alignItems: 'center',
         gap: '5px',
         margin: '0 0 0 20px',
+        float: 'right',
     },
     statusDot: {
         width: '10px',
@@ -227,6 +228,7 @@ const styles = {
         fontFamily: 'var(--mc-font-family), "Fira Code", monospace',
         lineHeight: '1.5',
         color: '#AAAAAA',
+        width: '35em'
     }
 };
 
