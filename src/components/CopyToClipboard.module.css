@@ -1,0 +1,11 @@
+.copyContainer {
+    transition: filter 0.2s ease-in-out;
+}
+
+.copyContainer:hover {
+    filter: brightness(0.95); 
+}
+
+[data-theme="dark"] .copyContainer:hover {
+    filter: brightness(2);
+}
