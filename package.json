@@ -37,6 +37,7 @@
     "@docusaurus/types": "^3.6.1",
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
     "@types/webpack-env": "^1.18.8",
     "typescript": "~5.5.2",
     "vite": "^7.0.6"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, type FC } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 // API 响应的数据结构 (保持不变)
 export interface McSrvStatusResponse {
@@ -75,39 +76,47 @@ const MotdDisplay: FC<{ data: McSrvStatusResponse; address: string }> = ({ data,
         );
     }
 
-    const motdHtml = data.motd?.html?.join('<br />') || '';
-    const onlineStatusText = `在线(${data.players?.online}/${data.players?.max})`;
+    const onlineStatus = (
+        <div style={styles.statusIndicator}>
+            <span>{data.players?.online}/{data.players?.max}</span>
+            <span style={{ ...styles.statusDot, backgroundColor: '#55FF55' }} />
+        </div>
+    );
+    const motdHtml = data.motd?.html?.map((value, index) => index == 0 ? value + renderToStaticMarkup(onlineStatus) : value).join('<br />') || '';
 
     return (
-        <div style={styles.motdContainer}>
-            {/* 保留的未使用代码 */}
-            {/*
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
-                {data.icon && <img src={data.icon} alt="Server Icon" style={{ width: '64px', height: '64px', imageRendering: 'pixelated' }} />}
-                <div>
-                    <strong style={{ fontSize: '1.2em', padding: "4px 8px" }}>{data.hostname || address}</strong>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '4px' }}>
-                        <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: data.online ? '#55FF55' : '#FF5555' }}></span>
-                        <span style={{ fontWeight: 'bold' }}> {data.online ? `在线` : '离线'} </span>
-                    </div>
-                </div>
-            </div>
-            <hr style={{ borderColor: '#555', borderStyle: 'dashed' }} />
-            */}
+        // <div style={styles.motdContainer}>
+        //     <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+        //         {data.icon && <img src={data.icon} alt="Server Icon" style={{ width: '64px', height: '64px', imageRendering: 'pixelated' }} />}
+        //         <div>
+        //             <strong style={{ fontSize: '1.2em', padding: "4px 8px" }}>{data.hostname || address}</strong>
+        //             <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '4px' }}>
+        //                 <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: data.online ? '#55FF55' : '#FF5555' }}></span>
+        //                 <span style={{ fontWeight: 'bold' }}> {data.online ? `在线` : '离线'} </span>
+        //             </div>
+        //         </div>
+        //     </div>
+        //     <hr style={{ borderColor: '#555', borderStyle: 'dashed' }} />
 
+        //     {motdHtml && (
+        //         <div style={styles.motdContent}>
+        //             <div
+        //                 style={styles.motdText}
+        //                 dangerouslySetInnerHTML={{ __html: motdHtml }}
+        //             />
+        //         </div>
+        //     )}
+        // </div>
+        <>
             {motdHtml && (
                 <div style={styles.motdContent}>
-                    <div style={styles.statusIndicator}>
-                        <span style={{ ...styles.statusDot, backgroundColor: '#55FF55' }} />
-                        <span>{onlineStatusText}</span>
-                    </div>
                     <div
                         style={styles.motdText}
                         dangerouslySetInnerHTML={{ __html: motdHtml }}
                     />
                 </div>
             )}
-        </div>
+        </>
     );
 };
 
@@ -193,8 +202,6 @@ const styles = {
         border: `2px solid ${borderColor}`,
         borderRadius: '8px',
         backgroundColor: containerColor,
-        fontFamily: '"Minecraft", "Fira Code", monospace',
-        lineHeight: '1.5',
         backdropFilter: 'blur(5px)',
         fontColor: 'var(--ifm-font-color-base)'
     },
@@ -202,10 +209,10 @@ const styles = {
         display: 'flex',
     },
     statusIndicator: {
-        display: 'flex',
+        display: 'inline-flex',
         alignItems: 'center',
         gap: '5px',
-        margin: '0 10px',
+        margin: '0 0 0 20px',
     },
     statusDot: {
         width: '10px',
@@ -214,10 +221,11 @@ const styles = {
     },
     motdText: {
         padding: '10px 15px',
-        margin: '0 10px',
         borderRadius: '8px',
         flexGrow: '1',
         backgroundColor: 'rgba(0, 0, 0)',
+        fontFamily: '"Minecraft", "Fira Code", monospace',
+        lineHeight: '1.5',
         color: '#AAAAAA',
     }
 };
