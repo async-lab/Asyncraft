@@ -8,6 +8,9 @@ export interface McSrvStatusResponse {
     port: number;
     hostname?: string;
     version?: string;
+    protocol?: {
+        version?: number;
+    }
     icon?: string;
     motd?: {
         raw: string[];
@@ -60,29 +63,26 @@ const LoadingSpinner: FC = () => (
     </div>
 );
 
-// 错误信息展示组件
 const ErrorDisplay: FC<{ message: string }> = ({ message }) => (
-    <div style={styles.errorContainer}>{message}</div>
+    <div style={styles.errorContainer} dangerouslySetInnerHTML={{ __html: message }}></div>
 );
 
+const StatusDisplay: FC<{ data: McSrvStatusResponse }> = ({ data }) => (
+    <div style={styles.statusIndicator}>
+        <span>{data.protocol?.version == -1 ? `${data.version}` : `${data.players?.online} / ${data.players?.max}`}</span>
+        <span style={{ ...styles.statusDot, backgroundColor: `${data.protocol?.version == -1 ? '#FF5555' : '#55FF55'}` }} />
+    </div>
+)
+
 // MOTD 渲染组件
-const MotdDisplay: FC<{ data: McSrvStatusResponse; address: string }> = ({ data, address }) => {
-    // 如果服务器离线，显示离线提示
+const MotdDisplay: FC<{ data: McSrvStatusResponse; }> = ({ data }) => {
     if (!data?.online) {
         return (
-            <div style={styles.offlineContainer}>
-                服务器 <strong>{address}</strong> 当前不在线或无法访问。
-            </div>
+            <ErrorDisplay message={`服务器当前不在线或无法访问。`} />
         );
     }
 
-    const onlineStatus = (
-        <div style={styles.statusIndicator}>
-            <span>{data.players?.online}/{data.players?.max}</span>
-            <span style={{ ...styles.statusDot, backgroundColor: '#55FF55' }} />
-        </div>
-    );
-    const motdHtml = data.motd?.html?.map((value, index) => index == 0 ? value + renderToStaticMarkup(onlineStatus) : value).join('<br />') || '';
+    const motdHtml = data.motd?.html?.map((value, index) => index == 0 ? value + renderToStaticMarkup(<StatusDisplay data={data} />) : value).join('<br />') || '';
 
     return (
         // <div style={styles.motdContainer}>
@@ -164,7 +164,7 @@ const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
     if (loading) return <LoadingSpinner />;
     if (error) return <ErrorDisplay message={error} />;
 
-    return <MotdDisplay data={serverData!!} address={address} />;
+    return <MotdDisplay data={serverData!!} />;
 }
 
 // ---- 样式对象 ----
@@ -184,16 +184,9 @@ const styles: Record<string, React.CSSProperties> = {
     },
     errorContainer: {
         padding: '10px',
-        border: '1px solid #f44336',
-        borderRadius: '8px',
-        backgroundColor: '#ffdddd',
-        color: 'var(--ifm-font-color-base)'
-    },
-    offlineContainer: {
-        padding: '10px',
         borderLeft: '4px solid #f44336',
         backgroundColor: '#ffdddd',
-        color: 'var(--ifm-font-color-base)'
+        color: '#333',
     },
     motdContainer: {
         padding: '20px',
