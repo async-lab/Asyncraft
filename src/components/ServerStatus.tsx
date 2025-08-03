@@ -1,5 +1,6 @@
-import React, { useState, useEffect, type FC, type ReactNode } from 'react';
+import React, { useState, useEffect, type FC } from 'react';
 
+// API 响应的数据结构 (保持不变)
 export interface McSrvStatusResponse {
     online: boolean;
     ip: string;
@@ -20,12 +21,11 @@ export interface McSrvStatusResponse {
             uuid: string;
         }[];
     };
-    // 根据需要添加更多字段...
     debug: {
         cachetime: number;
         cacheexpire: number;
         apiversion: number;
-        [key: string]: any; // 其他 debug 字段
+        [key: string]: any;
     };
 }
 
@@ -35,94 +35,84 @@ interface ServerStatusProps {
     bedrock?: boolean;
 }
 
-// 加载动画组件 (TSX)
+// ---- 辅助组件 ----
+
+// 加载动画组件
 const LoadingSpinner: FC = () => (
-    <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-        border: '1px solid rgba(192, 192, 192, 0.75)',
-        borderRadius: '8px',
-        backgroundColor: 'rgba(249, 249, 249, 0.75)',
-        color: '#333',
-    }}>
+    <div style={styles.loadingContainer}>
         <div className="spinner" />
         <span style={{ marginLeft: '10px' }}>正在获取服务器状态...</span>
-        {/* 样式可以移到 CSS 文件中，这里为了简单内联 */}
+        {/* Spinner 动画样式，通过 style 标签注入 */}
         <style>{`
-      .spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        border-left-color: #09f;
-        animation: spin 1s ease infinite;
-      }
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    `}</style>
+            .spinner {
+                width: 24px;
+                height: 24px;
+                border: 4px solid rgba(0, 0, 0, 0.1);
+                border-left-color: #09f;
+                border-radius: 50%;
+                animation: spin 1s ease infinite;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        `}</style>
     </div>
 );
 
-// MOTD 渲染组件 (TSX)
-interface MotdProps {
-    data: McSrvStatusResponse | null;
-    serverAddress: string;
-}
+// 错误信息展示组件
+const ErrorDisplay: FC<{ message: string }> = ({ message }) => (
+    <div style={styles.errorContainer}>{message}</div>
+);
 
-const Motd: FC<MotdProps> = ({ data, serverAddress }) => {
+// MOTD 渲染组件
+const MotdDisplay: FC<{ data: McSrvStatusResponse; address: string }> = ({ data, address }) => {
+    // 如果服务器离线，显示离线提示
     if (!data?.online) {
         return (
-            <div style={{ padding: '10px', backgroundColor: '#ffdddd', borderLeft: '4px solid #f44336', color: '#333' }}>
-                服务器 <strong>{serverAddress}</strong> 当前不在线或无法访问。
+            <div style={styles.offlineContainer}>
+                服务器 <strong>{address}</strong> 当前不在线或无法访问。
             </div>
         );
     }
 
-    const motdHtml = data.motd?.html?.join('<br />');
+    const motdHtml = data.motd?.html?.join('<br />') || '';
+    const onlineStatusText = `在线(${data.players?.online}/${data.players?.max})`;
 
     return (
-        <div style={{
-            padding: '20px',
-            border: '2px solid rgba(138, 138, 138, 0.5)',
-            borderRadius: '8px',
-            backgroundColor: 'rgba(60, 60, 60, 0.5)',
-            color: '#fff',
-            fontFamily: '"Minecraftia", "Fira Code", monospace', // 使用更合适的字体
-            lineHeight: '1.5',
-            backdropFilter: 'blur(5px)',
-        }}>
-            {/* <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+        <div style={styles.motdContainer}>
+            {/* 保留的未使用代码 */}
+            {/*
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
                 {data.icon && <img src={data.icon} alt="Server Icon" style={{ width: '64px', height: '64px', imageRendering: 'pixelated' }} />}
                 <div>
-                    <strong style={{ fontSize: '1.2em', padding: "4px 8px" }}>{data.hostname || serverAddress}</strong>
+                    <strong style={{ fontSize: '1.2em', padding: "4px 8px" }}>{data.hostname || address}</strong>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '4px' }}>
                         <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: data.online ? '#55FF55' : '#FF5555' }}></span>
                         <span style={{ fontWeight: 'bold' }}> {data.online ? `在线` : '离线'} </span>
                     </div>
                 </div>
             </div>
-            <hr style={{ borderColor: '#555', borderStyle: 'dashed' }} /> */}
-            {
-                motdHtml && (
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', margin: '0 10px' }}>
-                            <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: data.online ? '#55FF55' : '#FF5555' }}></span>
-                            <span style={{ fontWeight: 'bold' }}> {data.online ? `在线(${data.players?.online}/${data.players?.max})` : '离线'} </span>
-                        </div>
-                        <div style={{ padding: '10px 15px', margin: '0 10px', borderRadius: '8px', flexGrow: '1', wordBreak: 'break-word', backgroundColor: 'rgba(26, 26, 26, 0.5)' }} dangerouslySetInnerHTML={{ __html: motdHtml }} />
+            <hr style={{ borderColor: '#555', borderStyle: 'dashed' }} />
+            */}
+
+            {motdHtml && (
+                <div style={styles.motdContent}>
+                    <div style={styles.statusIndicator}>
+                        <span style={{ ...styles.statusDot, backgroundColor: '#55FF55' }} />
+                        <span>{onlineStatusText}</span>
                     </div>
-                )
-            }
+                    <div
+                        style={styles.motdText}
+                        dangerouslySetInnerHTML={{ __html: motdHtml }}
+                    />
+                </div>
+            )}
         </div>
     );
 };
 
 
-// 主组件 (TSX)
+// ---- 主组件 ----
 const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
     const [serverData, setServerData] = useState<McSrvStatusResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -135,7 +125,7 @@ const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
             return;
         }
 
-        // 重置状态以进行新的请求
+        let isMounted = true; // 处理组件卸载时的状态更新
         setLoading(true);
         setError(null);
         setServerData(null);
@@ -145,28 +135,91 @@ const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
 
         fetch(apiUrl)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`网络请求失败 (状态: ${response.status})`);
-                }
+                if (!response.ok) throw new Error(`网络请求失败 (状态: ${response.status})`);
                 return response.json() as Promise<McSrvStatusResponse>;
             })
             .then(data => {
-                setServerData(data);
+                if (isMounted) setServerData(data);
             })
             .catch((err: Error) => {
                 console.error("获取服务器状态失败:", err);
-                setError(err.message);
+                if (isMounted) setError(err.message);
             })
             .finally(() => {
-                setLoading(false);
+                if (isMounted) setLoading(false);
             });
 
-    }, [address, bedrock]); // 依赖项数组保持不变
+        return () => { isMounted = false; }; // 清理函数
+    }, [address, bedrock]);
 
     if (loading) return <LoadingSpinner />;
-    if (error) return <div style={{ color: 'red', padding: '10px', border: '1px solid red' }}>{error}</div>;
+    if (error) return <ErrorDisplay message={error} />;
 
-    return <Motd data={serverData} serverAddress={address} />;
+    return <MotdDisplay data={serverData!!} address={address} />;
 }
+
+// ---- 样式对象 ----
+const containerColor = 'var(--ifm-code-background)';
+const borderColor = 'var(--ifm-table-border-color)';
+
+const styles = {
+    loadingContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        border: `1px solid ${borderColor}`,
+        borderRadius: '8px',
+        backgroundColor: containerColor,
+        fontColor: 'var(--ifm-font-color-base)'
+    },
+    errorContainer: {
+        padding: '10px',
+        border: '1px solid #f44336',
+        borderRadius: '8px',
+        color: '#f44336',
+        backgroundColor: '#ffdddd',
+        fontColor: 'var(--ifm-font-color-base)'
+    },
+    offlineContainer: {
+        padding: '10px',
+        borderLeft: '4px solid #f44336',
+        color: '#333',
+        backgroundColor: '#ffdddd',
+        fontColor: 'var(--ifm-font-color-base)'
+    },
+    motdContainer: {
+        padding: '20px',
+        border: `2px solid ${borderColor}`,
+        borderRadius: '8px',
+        backgroundColor: containerColor,
+        fontFamily: '"Minecraft", "Fira Code", monospace',
+        lineHeight: '1.5',
+        backdropFilter: 'blur(5px)',
+        fontColor: 'var(--ifm-font-color-base)'
+    },
+    motdContent: {
+        display: 'flex',
+    },
+    statusIndicator: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
+        margin: '0 10px',
+    },
+    statusDot: {
+        width: '10px',
+        height: '10px',
+        borderRadius: '50%',
+    },
+    motdText: {
+        padding: '10px 15px',
+        margin: '0 10px',
+        borderRadius: '8px',
+        flexGrow: '1',
+        backgroundColor: 'rgba(0, 0, 0)',
+        color: '#AAAAAA',
+    }
+};
 
 export default ServerStatus;

@@ -115,7 +115,46 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
 /* 字体 */
 @font-face {
   font-family: "CKTKingkong";
-  src: url("/font/CKTKingkong.woff2") format("woff2");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("/font/CKTKingkong.woff2") format("woff2"),
+       url("/font/CKTKingkong.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "Minecraft";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("/font/MinecraftRegular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Minecraft";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  font-size: 8px;
+  src: url("/font/MinecraftBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Minecraft";
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
+  font-size: 8px;
+  src:url("/font/MinecraftItalic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Minecraft";
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  font-size: 8px;
+  src:url("/font/MinecraftBoldItalic.otf") format("opentype");
 }
 
 /* 导航栏Logo文字 */
