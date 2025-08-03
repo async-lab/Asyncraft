@@ -46,35 +46,37 @@ export default function Home(): JSX.Element {
             title={`Hello from ${siteConfig.title}`}
             description="Description will go into a meta tag in <head />">
 
-            <HomepageHeader />
-            <main>
-                <center>
-                    <h1 className="sub__title">Java版/基岩版互通</h1>
-                    <div style={{ marginTop: "50px", marginBottom: "150px" }}>
-                        {socialLinks.map((link, i) => (
-                            <a
-                                key={link.href}
-                                href={link.href}
-                                ref={el => { parentRefs.current[i] = el }}
-                                className={styles.socialLink}
-                                style={{ position: 'relative', display: "inline-block" }}
-                                onMouseEnter={() => setHoveredIndex(i)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                            >
-                                <img
-                                    className={link.imgClass}
-                                    src={link.src}
-                                    height="400px"
-                                    style={{ margin: "0 30px" }}
-                                    alt={link.alt}
-                                />
-                                {/* <ParticleFirework show={hoveredIndex == i} parentRef={{ current: parentRefs.current[i] }} /> */}
-                            </a>
-                        ))}
-                    </div>
-                </center>
-            </main>
-            <BackgroundImageComponent />
+            <div className={styles.fullPage}>
+                <HomepageHeader />
+                <main>
+                    <center>
+                        <h1 className="sub__title">Java版/基岩版互通</h1>
+                        <div style={{ marginTop: "50px", marginBottom: "150px" }}>
+                            {socialLinks.map((link, i) => (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    ref={el => { parentRefs.current[i] = el }}
+                                    className={styles.socialLink}
+                                    style={{ position: 'relative', display: "inline-block" }}
+                                    onMouseEnter={() => setHoveredIndex(i)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
+                                >
+                                    <img
+                                        className={link.imgClass}
+                                        src={link.src}
+                                        height="400px"
+                                        style={{ margin: "0 30px" }}
+                                        alt={link.alt}
+                                    />
+                                    {/* <ParticleFirework show={hoveredIndex == i} parentRef={{ current: parentRefs.current[i] }} /> */}
+                                </a>
+                            ))}
+                        </div>
+                    </center>
+                </main>
+                <BackgroundImageComponent />
+            </div>
         </Layout>
     );
 }
