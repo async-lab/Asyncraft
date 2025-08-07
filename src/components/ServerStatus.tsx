@@ -1,45 +1,13 @@
 import React, { useState, useEffect, type FC } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-
-// API 响应的数据结构 (保持不变)
-export interface McSrvStatusResponse {
-    online: boolean;
-    ip: string;
-    port: number;
-    hostname?: string;
-    version?: string;
-    protocol?: {
-        version?: number;
-    }
-    icon?: string;
-    motd?: {
-        raw: string[];
-        clean: string[];
-        html: string[];
-    };
-    players?: {
-        online: number;
-        max: number;
-        list?: {
-            name: string;
-            uuid: string;
-        }[];
-    };
-    debug: {
-        cachetime: number;
-        cacheexpire: number;
-        apiversion: number;
-        [key: string]: any;
-    };
-}
+import * as mcs from 'node-mcstatus';
+import * as cheerio from 'cheerio';
 
 // 定义组件接收的 props 类型
 interface ServerStatusProps {
     address: string;
     bedrock?: boolean;
 }
-
-// ---- 辅助组件 ----
 
 // 加载动画组件
 const LoadingSpinner: FC = () => (
@@ -67,63 +35,46 @@ const ErrorDisplay: FC<{ message: string }> = ({ message }) => (
     <div style={styles.errorContainer} dangerouslySetInnerHTML={{ __html: message }}></div>
 );
 
-const StatusDisplay: FC<{ data: McSrvStatusResponse }> = ({ data }) => (
+const StatusDisplay: FC<{ data: mcs.JavaStatusResponse }> = ({ data }) => (
     <div style={styles.statusIndicator}>
-        <span>{data.protocol?.version == -1 ? `${data.version}` : `${data.players?.online} / ${data.players?.max}`}</span>
-        <span style={{ ...styles.statusDot, backgroundColor: `${data.protocol?.version == -1 ? '#FF5555' : '#55FF55'}` }} />
+        <span>{data.version?.protocol == -1 ? `${data.version?.name_raw}` : `${data.players?.online} / ${data.players?.max}`}</span>
+        <span style={{ ...styles.statusDot, backgroundColor: `${data.version?.protocol == -1 ? '#FF5555' : '#55FF55'}` }} />
     </div>
 )
 
 // MOTD 渲染组件
-const MotdDisplay: FC<{ data: McSrvStatusResponse; }> = ({ data }) => {
+const MotdDisplay: FC<{ data: mcs.JavaStatusResponse; }> = ({ data }) => {
     if (!data?.online) {
         return (
             <ErrorDisplay message={`服务器当前不在线或无法访问。`} />
         );
     }
 
-    const motdHtml = data.motd?.html?.map((value, index) => index == 0 ? value + renderToStaticMarkup(<StatusDisplay data={data} />) : value).join('<br />') || '';
+    const motdHtml = data.motd?.html || ''
+    const $ = cheerio.load(motdHtml);
+    const outermostSpan = $('body>span').first();
+    const firstSpan = outermostSpan.children('span').first();
+    firstSpan.after(renderToStaticMarkup(<StatusDisplay data={data} />) + "<br/>")
+
+    let innerHTML = $('body>span').html()
+    if (!innerHTML) {
+        return <ErrorDisplay message="无法解析 MOTD 内容。" />;
+    }
 
     return (
-        // <div style={styles.motdContainer}>
-        //     <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
-        //         {data.icon && <img src={data.icon} alt="Server Icon" style={{ width: '64px', height: '64px', imageRendering: 'pixelated' }} />}
-        //         <div>
-        //             <strong style={{ fontSize: '1.2em', padding: "4px 8px" }}>{data.hostname || address}</strong>
-        //             <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '4px' }}>
-        //                 <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: data.online ? '#55FF55' : '#FF5555' }}></span>
-        //                 <span style={{ fontWeight: 'bold' }}> {data.online ? `在线` : '离线'} </span>
-        //             </div>
-        //         </div>
-        //     </div>
-        //     <hr style={{ borderColor: '#555', borderStyle: 'dashed' }} />
-
-        //     {motdHtml && (
-        //         <div style={styles.motdContent}>
-        //             <div
-        //                 style={styles.motdText}
-        //                 dangerouslySetInnerHTML={{ __html: motdHtml }}
-        //             />
-        //         </div>
-        //     )}
-        // </div>
-        <>
-            {motdHtml && (
-                <div style={styles.motdContent}>
-                    <div
-                        style={styles.motdText}
-                        dangerouslySetInnerHTML={{ __html: motdHtml }}
-                    />
-                </div>
-            )}
-        </>
+        <div style={styles.motdContent}>
+            <div
+                style={styles.motdText}
+                dangerouslySetInnerHTML={{ __html: $('body>span').html()!! }}
+            />
+        </div>
     );
 };
 
 
 // ---- 主组件 ----
 const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
-    const [serverData, setServerData] = useState<McSrvStatusResponse | null>(null);
+    const [serverData, setServerData] = useState<mcs.JavaStatusResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -139,22 +90,17 @@ const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
         setError(null);
         setServerData(null);
 
-        const apiType = bedrock ? 'bedrock/' : '';
-        const apiUrl = `https://api.mcsrvstat.us/3/${apiType}${address}`;
+        let host = address.split(':')[0];
+        let port = Number(address.split(':')[1] || '25565');
 
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) throw new Error(`网络请求失败 (状态: ${response.status})`);
-                return response.json() as Promise<McSrvStatusResponse>;
-            })
-            .then(data => {
-                if (isMounted) setServerData(data);
+        mcs.statusJava(host, port, { query: true })
+            .then((result) => {
+                if (isMounted) setServerData(result);
             })
             .catch((err: Error) => {
                 console.error("获取服务器状态失败:", err);
                 if (isMounted) setError(err.message);
-            })
-            .finally(() => {
+            }).finally(() => {
                 if (isMounted) setLoading(false);
             });
 
