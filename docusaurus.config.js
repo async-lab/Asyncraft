@@ -107,6 +107,11 @@ const config = {
             label: '地图',
             docId: '地图',
           }, {
+            type: 'doc',
+            position: 'left',
+            label: '状态',
+            docId: '状态',
+          }, {
             type: 'dropdown',
             label: '其他',
             position: 'left',
