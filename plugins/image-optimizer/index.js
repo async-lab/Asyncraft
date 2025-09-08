@@ -9,9 +9,8 @@ const compressionOptions = {
   jpeg: { quality: 100, mozjpeg: true },
   png: { quality: 100, palette: true },
   webp: { quality: 100 },
-  avif: { quality: 100 }
+  avif: { quality: 100 },
 };
-
 
 /**
  * 自定义 Docusaurus 插件，用于在构建后优化图片
@@ -30,7 +29,9 @@ module.exports = function (context, options) {
       const imagePattern = "**/*.{png,jpg,jpeg,webp,avif}";
 
       // 2. 使用 glob 查找 build 输出目录中的所有图片
-      const images = await glob(path.join(outDir, imagePattern).replace(/\\/g, '/'));
+      const images = await glob(
+        path.join(outDir, imagePattern).replace(/\\/g, "/")
+      );
 
       if (images.length === 0) {
         console.log("✅ [Image Optimizer]: No images found to optimize.");
@@ -51,13 +52,34 @@ module.exports = function (context, options) {
             const originalBuffer = await fs.readFile(imagePath);
             const originalSize = originalBuffer.length;
 
-            // 4. 使用 sharp 进行压缩
-            const optimizedBuffer = await sharp(originalBuffer)
-              .jpeg(compressionOptions.jpeg)
-              .png(compressionOptions.png)
-              .webp(compressionOptions.webp)
-              .avif(compressionOptions.avif)
-              .toBuffer();
+            const ext = path.extname(imagePath).toLowerCase();
+            let optimizedBuffer;
+
+            switch (ext) {
+              case ".jpg":
+              case ".jpeg":
+                optimizedBuffer = await sharp(originalBuffer)
+                  .jpeg(compressionOptions.jpeg)
+                  .toBuffer();
+                break;
+              case ".png":
+                optimizedBuffer = await sharp(originalBuffer)
+                  .png(compressionOptions.png)
+                  .toBuffer();
+                break;
+              case ".webp":
+                optimizedBuffer = await sharp(originalBuffer)
+                  .webp(compressionOptions.webp)
+                  .toBuffer();
+                break;
+              case ".avif":
+                optimizedBuffer = await sharp(originalBuffer)
+                  .avif(compressionOptions.avif)
+                  .toBuffer();
+                break;
+              default:
+                return; // 跳过不支持的格式
+            }
 
             const optimizedSize = optimizedBuffer.length;
             const savedBytes = originalSize - optimizedSize;
