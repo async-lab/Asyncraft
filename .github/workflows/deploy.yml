@@ -28,6 +28,7 @@ jobs:
 
       - name: Install and Build
         run: |
+          corepack enable
           pnpm install
           pnpm run build
 
