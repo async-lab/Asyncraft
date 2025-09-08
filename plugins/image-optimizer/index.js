@@ -90,9 +90,11 @@ module.exports = function (context, options) {
               totalSavedBytes += savedBytes;
               optimizedCount++;
               console.log(
-                `  ✅ Optimized: ${path.basename(imagePath)} (saved ${(
-                  savedBytes / 1024
-                ).toFixed(2)} KB)`
+                `  ✅ Optimized: ${path
+                  .basename(imagePath)
+                  .padEnd(50)} ${bytesToHuman(originalSize)} → ${bytesToHuman(
+                  optimizedSize
+                )}`
               );
             }
           } catch (error) {
@@ -102,10 +104,31 @@ module.exports = function (context, options) {
       );
 
       // 6. 打印最终的优化报告
-      const totalSavedMB = (totalSavedBytes / (1024 * 1024)).toFixed(2);
       console.log(`\n🎉 [Image Optimizer]: Finished!`);
       console.log(`   Optimized ${optimizedCount} images.`);
-      console.log(`   Total savings: ${totalSavedMB} MB.`);
+      console.log(`   Total savings: ${bytesToHuman(totalSavedBytes)}.`);
     },
   };
 };
+
+/**
+ * 将字节数转换为人类可读的格式。
+ *
+ * @param {number} bytes - 要转换的字节数。
+ * @param {number} [decimals=2] - 保留的小数位数，默认是2。
+ * @returns {string} - 转换后的字符串，包含数值和单位。
+ */
+function bytesToHuman(bytes, decimals = 2) {
+  if (!Number.isInteger(bytes) || bytes < 0) {
+    throw new Error("输入必须是非负整数");
+  }
+
+  if (bytes === 0) return "0 B";
+
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+}
