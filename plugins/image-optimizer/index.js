@@ -6,10 +6,10 @@ const { glob } = require("glob");
 const sharp = require("sharp");
 
 const compressionOptions = {
-  jpeg: { quality: 100, mozjpeg: true },
-  png: { quality: 100, palette: true },
-  webp: { quality: 100 },
-  avif: { quality: 100 },
+  jpeg: { quality: 90, mozjpeg: true },
+  png: { compressionLevel: 9, palette: true },
+  webp: { quality: 90 },
+  avif: { quality: 90 },
 };
 
 /**
