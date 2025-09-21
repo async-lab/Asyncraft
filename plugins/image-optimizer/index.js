@@ -5,11 +5,20 @@ const fs = require("fs/promises");
 const { glob } = require("glob");
 const sharp = require("sharp");
 
-const compressionOptions = {
-  jpeg: { quality: 90, mozjpeg: true },
+const MIN_BYTES_PER_PIXEL = 0.2;
+const MIN_BPP_BY_FORMAT = {
+  ".jpg": 0.2,
+  ".jpeg": 0.2,
+  ".png": 0.5,
+  ".webp": 0.15,
+  ".avif": 0.1,
+};
+
+const COMPRESSION_OPTIONS = {
+  jpeg: { quality: 85, mozjpeg: true },
   png: { compressionLevel: 9, palette: true },
   webp: { quality: 90 },
-  avif: { quality: 90 },
+  avif: { quality: 80 },
 };
 
 /**
@@ -53,28 +62,46 @@ module.exports = function (context, options) {
             const originalSize = originalBuffer.length;
 
             const ext = path.extname(imagePath).toLowerCase();
+            const minBpp = MIN_BPP_BY_FORMAT[ext] ?? MIN_BYTES_PER_PIXEL;
+
+            const image = sharp(originalBuffer);
+            const metadata = await image.metadata();
+            const { width, height } = metadata;
+            const bytesPerPixel = originalSize / (width * height);
+            if (bytesPerPixel < minBpp) {
+              // 小于阈值，忽略优化
+              console.log(
+                `  ⚠️ Skipped: ${path
+                  .basename(imagePath)
+                  .padEnd(50)} bytes/pixel ${bytesPerPixel.toFixed(
+                  3
+                )} < ${minBpp}`
+              );
+              return;
+            }
+
             let optimizedBuffer;
 
             switch (ext) {
               case ".jpg":
               case ".jpeg":
                 optimizedBuffer = await sharp(originalBuffer)
-                  .jpeg(compressionOptions.jpeg)
+                  .jpeg(COMPRESSION_OPTIONS.jpeg)
                   .toBuffer();
                 break;
               case ".png":
                 optimizedBuffer = await sharp(originalBuffer)
-                  .png(compressionOptions.png)
+                  .png(COMPRESSION_OPTIONS.png)
                   .toBuffer();
                 break;
               case ".webp":
                 optimizedBuffer = await sharp(originalBuffer)
-                  .webp(compressionOptions.webp)
+                  .webp(COMPRESSION_OPTIONS.webp)
                   .toBuffer();
                 break;
               case ".avif":
                 optimizedBuffer = await sharp(originalBuffer)
-                  .avif(compressionOptions.avif)
+                  .avif(COMPRESSION_OPTIONS.avif)
                   .toBuffer();
                 break;
               default:

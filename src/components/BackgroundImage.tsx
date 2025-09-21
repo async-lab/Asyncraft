@@ -6,7 +6,7 @@ const maxOpacity = 0.15;
 
 const BackgroundImageComponent = () => {
   const [images, setImages] = useState(() => {
-    const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg)$/);
+    const imageContext = require.context('../../static/img/背景', false, /\.(png|jpe?g|svg|webp|avif)$/);
     return imageContext.keys()
       .map(key => key.replace('./', ''))
       .sort(() => Math.random() - 0.5);
