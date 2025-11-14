@@ -28,9 +28,9 @@ const socialLinks = [
         alt: 'QQ Group QR Code'
     },
     {
-        href: 'https://kook.top/ZpHV6s',
-        src: '/img/kook.png',
-        alt: 'KOOK Server QR Code'
+        href: 'https://oopz.cn/i/1dniC8',
+        src: '/img/oopz.png',
+        alt: 'Oopz Link'
     },
 ];
 
