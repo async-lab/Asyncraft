@@ -37,7 +37,6 @@ const config: Config = {
   projectName: projectName, // Usually your repo name.
 
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -208,6 +207,10 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownImages: "warn",
+      onBrokenMarkdownLinks: "warn",
+    },
   },
 
   themes: [
