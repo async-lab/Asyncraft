@@ -1,4 +1,4 @@
-name: Deploy Docusaurus to GitHub Pages (Actions)
+name: Build and Deploy
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
         run: echo 'site.asyncraft.club' > build/CNAME
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: build
 
