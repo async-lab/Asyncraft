@@ -119,8 +119,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
   font-style: normal;
   font-weight: normal;
   font-display: swap;
-  src: url("/font/CKTKingkong.woff2") format("woff2"),
-       url("/font/CKTKingkong.TTF") format("truetype");
+  src: url("/font/CKTKingkong.woff2") format("woff2");
 }
 
 @font-face {
@@ -128,7 +127,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
   font-style: normal;
   font-weight: normal;
   font-display: swap;
-  src: url("/font/MinecraftRegular.otf") format("opentype");
+  src: url("/font/MinecraftRegular.woff2") format("woff2");
 }
 
 @font-face {
@@ -137,7 +136,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
   font-weight: bold;
   font-display: swap;
   font-size: 8px;
-  src: url("/font/MinecraftBold.otf") format("opentype");
+  src: url("/font/MinecraftBold.woff2") format("woff2");
 }
 
 @font-face {
@@ -146,7 +145,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
   font-weight: normal;
   font-display: swap;
   font-size: 8px;
-  src:url("/font/MinecraftItalic.otf") format("opentype");
+  src: url("/font/MinecraftItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -155,7 +154,7 @@ a.menu__link--sublist:not(.menu__link--sublist-caret).menu__link--sublist.menu__
   font-weight: bold;
   font-display: swap;
   font-size: 8px;
-  src:url("/font/MinecraftBoldItalic.otf") format("opentype");
+  src: url("/font/MinecraftBoldItalic.woff2") format("woff2");
 }
 
 @font-face {
