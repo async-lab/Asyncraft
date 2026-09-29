@@ -3,6 +3,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import * as mcs from 'node-mcstatus';
 import * as cheerio from 'cheerio';
 
+const BASE_URL = 'https://mcstatus.asyncraft.club/v2';
+
 // 定义组件接收的 props 类型
 interface ServerStatusProps {
     address: string;
@@ -45,28 +47,25 @@ const StatusDisplay: FC<{ data: mcs.JavaStatusResponse }> = ({ data }) => (
 // MOTD 渲染组件
 const MotdDisplay: FC<{ data: mcs.JavaStatusResponse; }> = ({ data }) => {
     if (!data?.online) {
-        return (
-            <ErrorDisplay message={`服务器当前不在线或无法访问。`} />
-        );
+        return <ErrorDisplay message="服务器当前不在线或无法访问。" />;
     }
 
-    const motdHtml = data.motd?.html || ''
-    const $ = cheerio.load(motdHtml);
-    const outermostSpan = $('body>span').first();
-    const firstSpan = outermostSpan.children('span').first();
-    firstSpan.after(renderToStaticMarkup(<StatusDisplay data={data} />) + "<br/>")
+    const motdHtml = data.motd?.html || '';
 
-    let innerHTML = $('body>span').html()
-    if (!innerHTML) {
-        return <ErrorDisplay message="无法解析 MOTD 内容。" />;
-    }
+    const [line1, ...restLines] = motdHtml.split('\n');
+    const rest = restLines.join('\n');
 
     return (
         <div style={styles.motdContent}>
-            <div
-                style={styles.motdText}
-                dangerouslySetInnerHTML={{ __html: $('body>span').html()!! }}
-            />
+            <div style={styles.motdText}>
+                {/* 第一行文字 + 右浮动状态指示器 */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span dangerouslySetInnerHTML={{ __html: line1 }} />
+                    <StatusDisplay data={data} />
+                </div>
+                {/* 第二行文字 */}
+                {rest && <div dangerouslySetInnerHTML={{ __html: rest }} />}
+            </div>
         </div>
     );
 };
@@ -93,7 +92,7 @@ const ServerStatus: FC<ServerStatusProps> = ({ address, bedrock = false }) => {
         let host = address.split(':')[0];
         let port = Number(address.split(':')[1] || '25565');
 
-        mcs.statusJava(host, port, { query: true })
+        mcs.statusJava(host, port, { query: true, baseURL: BASE_URL })
             .then((result) => {
                 if (isMounted) setServerData(result);
             })
