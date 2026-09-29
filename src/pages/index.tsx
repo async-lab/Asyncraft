@@ -24,12 +24,12 @@ function HomepageHeader(): JSX.Element {
 const socialLinks = [
     {
         href: 'https://qm.qq.com/q/yh2Rk8uxH2',
-        src: '/img/qrcode-dark.png',
+        src: '/img/qrcode-dark.avif',
         alt: 'QQ Group QR Code'
     },
     {
         href: 'https://oopz.cn/i/1dniC8',
-        src: '/img/oopz.png',
+        src: '/img/oopz.avif',
         alt: 'Oopz Link'
     },
 ];
